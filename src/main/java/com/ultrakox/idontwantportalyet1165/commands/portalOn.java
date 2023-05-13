@@ -10,7 +10,7 @@ import net.minecraft.command.Commands;
 
 public class portalOn {
     public portalOn(CommandDispatcher<CommandSource> dispatcher){
-        dispatcher.register(Commands.literal("portal").then(Commands.literal("nether").then(Commands.literal("enabled")
+        dispatcher.register(Commands.literal("portal").requires((source) -> source.hasPermissionLevel(2)).then(Commands.literal("nether").then(Commands.literal("enabled")
                 .then(Commands.argument("state", BoolArgumentType.bool()).executes((command) -> {
                     commonConfig.isPortalEnabled.set(BoolArgumentType.getBool(command, "state"));
                     commonConfig.SPEC.save();
